@@ -10,7 +10,9 @@
         <!-- Use your custom marker pattern file -->
         <a-marker type="pattern" url="./marker.patt">
             <a-image src="./assets/kfc.png" scale="1 1 1"></a-image>
-            <a-entity gltf-model="./assets/model.glb" scale="0.03 0.03 0.03"></a-entity>
+            <a-entity gltf-model="./assets/model.glb" scale="0.03 0.03 0.03"
+          animation="property: rotation; to: 0 360 0; loop: true; dur: 5000"></a-entity>
+
         </a-marker>
         <a-entity camera></a-entity>
     </a-scene>
