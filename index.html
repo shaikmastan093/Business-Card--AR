@@ -142,14 +142,14 @@
 
             <!-- Bottom: Social Media Icons as Images -->
             <a-image id="facebook-icon" 
-            src="./assets/facebook.png" 
-            scale="0.2 0.2 0.2" 
-            position="-0.5 -0.5 -0.5" 
-            visible="false" 
-            class="clickable social-icon"
-            onclick="console.log('Facebook icon clicked');"
-            onmouseenter="this.setAttribute('scale', '0.25 0.25 0.25');"  
-            onmouseleave="this.setAttribute('scale', '0.2 0.2 0.2');"></a-image>
+                      src="./assets/facebook.png" 
+                      scale="0.2 0.2 0.2" 
+                      position="-0.5 -0.5 -0.5" 
+                      visible="false" 
+                      class="clickable social-icon"
+                      onclick="console.log('Facebook icon clicked');"
+                      onmouseenter="this.setAttribute('scale', '0.25 0.25 0.25');"  
+                      onmouseleave="this.setAttribute('scale', '0.2 0.2 0.2');"></a-image>
 
             <a-image id="linkedin-icon" 
                      src="./assets/linkedin.png" 
@@ -174,84 +174,87 @@
 
     <script>
         document.querySelector('#marker').addEventListener('markerFound', () => {
-            const backgroundVideo = document.getElementById('background-video');
-            const profileImage = document.getElementById('profile-image');
-            const profileName = document.getElementById('profile-name');
-            const emailIcon = document.getElementById('email-icon');
-            const emailText = document.getElementById('email-text');
-            const contactIcon = document.getElementById('contact-icon');
-            const contactText = document.getElementById('contact-text');
-            const websiteIcon = document.getElementById('website-icon');
-            const websiteText = document.getElementById('website-text');
-            const facebookIcon = document.getElementById('facebook-icon');
-            const linkedinIcon = document.getElementById('linkedin-icon');
-            const instagramIcon = document.getElementById('instagram-icon');
-            const animatedModel = document.getElementById('animated-model');
+            const elementsToShow = [
+                'background-video', 
+                'profile-image', 
+                'profile-name', 
+                'email-icon', 
+                'email-text', 
+                'contact-icon', 
+                'contact-text', 
+                'website-icon', 
+                'website-text', 
+                'animated-model', 
+                'facebook-icon', 
+                'linkedin-icon', 
+                'instagram-icon'
+            ];
+
+            const toggleVisibility = (elementId, visibility) => {
+                const element = document.getElementById(elementId);
+                if (element) {
+                    element.setAttribute('visible', visibility);
+                }
+            };
 
             // Step 1: Show Video
-            backgroundVideo.setAttribute('visible', 'true');
-            backgroundVideo.setAttribute('autoplay', 'true');
+            toggleVisibility('background-video', 'true');
+            toggleVisibility('background-video', 'autoplay', 'true');
 
             // Step 2: After 1 second, show Profile Image with Flip Effect
             setTimeout(() => {
-                profileImage.setAttribute('visible', 'true');
-                profileImage.setAttribute('class', 'flip-animation');
-                profileName.setAttribute('visible', 'true');
-                profileName.setAttribute('class', 'slide-in');
+                toggleVisibility('profile-image', 'true');
+                toggleVisibility('profile-name', 'true');
+                document.getElementById('profile-image').setAttribute('class', 'flip-animation');
+                document.getElementById('profile-name').setAttribute('class', 'slide-in');
             }, 1000); // 1 second delay
 
             // Step 3: After 2 seconds, show Email, Contact, Website info
             setTimeout(() => {
-                emailIcon.setAttribute('visible', 'true');
-                emailText.setAttribute('visible', 'true');
-                contactIcon.setAttribute('visible', 'true');
-                contactText.setAttribute('visible', 'true');
-                websiteIcon.setAttribute('visible', 'true');
-                websiteText.setAttribute('visible', 'true');
+                toggleVisibility('email-icon', 'true');
+                toggleVisibility('email-text', 'true');
+                toggleVisibility('contact-icon', 'true');
+                toggleVisibility('contact-text', 'true');
+                toggleVisibility('website-icon', 'true');
+                toggleVisibility('website-text', 'true');
             }, 2000); // 2 seconds delay
 
-            // Step 4: After 3 seconds, show Animated Model
+            // Step 4: Show Animated Model
             setTimeout(() => {
-                animatedModel.setAttribute('visible', 'true');
+                toggleVisibility('animated-model', 'true');
             }, 3000); // 3 seconds delay
 
-            // Step 5: After 4 seconds, show Social Media Icons
+            // Step 5: Show Social Media Icons
             setTimeout(() => {
-                facebookIcon.setAttribute('visible', 'true');
-                linkedinIcon.setAttribute('visible', 'true');
-                instagramIcon.setAttribute('visible', 'true');
+                toggleVisibility('facebook-icon', 'true');
+                toggleVisibility('linkedin-icon', 'true');
+                toggleVisibility('instagram-icon', 'true');
             }, 4000); // 4 seconds delay
         });
 
         document.querySelector('#marker').addEventListener('markerLost', () => {
-            const backgroundVideo = document.getElementById('background-video');
-            const profileImage = document.getElementById('profile-image');
-            const profileName = document.getElementById('profile-name');
-            const emailIcon = document.getElementById('email-icon');
-            const emailText = document.getElementById('email-text');
-            const contactIcon = document.getElementById('contact-icon');
-            const contactText = document.getElementById('contact-text');
-            const websiteIcon = document.getElementById('website-icon');
-            const websiteText = document.getElementById('website-text');
-            const animatedModel = document.getElementById('animated-model');
-            const facebookIcon = document.getElementById('facebook-icon');
-            const linkedinIcon = document.getElementById('linkedin-icon');
-            const instagramIcon = document.getElementById('instagram-icon');
+            const elementsToHide = [
+                'background-video', 
+                'profile-image', 
+                'profile-name', 
+                'email-icon', 
+                'email-text', 
+                'contact-icon', 
+                'contact-text', 
+                'website-icon', 
+                'website-text', 
+                'animated-model', 
+                'facebook-icon', 
+                'linkedin-icon', 
+                'instagram-icon'
+            ];
 
-            // Hide all elements when the marker is lost
-            backgroundVideo.setAttribute('visible', 'false');
-            profileImage.setAttribute('visible', 'false');
-            profileName.setAttribute('visible', 'false');
-            emailIcon.setAttribute('visible', 'false');
-            emailText.setAttribute('visible', 'false');
-            contactIcon.setAttribute('visible', 'false');
-            contactText.setAttribute('visible', 'false');
-            websiteIcon.setAttribute('visible', 'false');
-            websiteText.setAttribute('visible', 'false');
-            animatedModel.setAttribute('visible', 'false');
-            facebookIcon.setAttribute('visible', 'false');
-            linkedinIcon.setAttribute('visible', 'false');
-            instagramIcon.setAttribute('visible', 'false');
+            elementsToHide.forEach(elementId => {
+                const element = document.getElementById(elementId);
+                if (element) {
+                    element.setAttribute('visible', 'false');
+                }
+            });
         });
     </script>
 </body>
