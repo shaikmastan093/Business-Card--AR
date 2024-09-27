@@ -10,6 +10,26 @@
         body {
             margin: 0;
             overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0; /* Light background for contrast */
+        }
+
+        a-scene {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Responsive styles */
+        @media (max-width: 768px) {
+            .profile-name {
+                font-size: 1.5em; /* Smaller font for mobile */
+            }
+            .social-icon {
+                scale: 0.1 0.1 0.1; /* Smaller icons for mobile */
+            }
         }
 
         .fade-in {
@@ -66,7 +86,7 @@
         <a-marker type="pattern" url="./marker.patt" id="marker">
             <!-- Video Background at the Top -->
             <a-video id="background-video" src="./assets/video.mp4" 
-                     position="0 1.5 0" scale="2 1  1" 
+                     position="0 1.5 0" scale="2 1 1" 
                      autoplay="false" loop="true" visible="false"></a-video>
 
             <!-- Right Side: Profile Image and Name -->
@@ -126,17 +146,17 @@
             scale="0.2 0.2 0.2" 
             position="-0.5 -0.5 -0.5" 
             visible="false" 
-            class="clickable"
+            class="clickable social-icon"
             onclick="console.log('Facebook icon clicked');"
-            onmouseenter="this.setAttribute('color', '#FF0000');"  
-            onmouseleave="this.setAttribute('color', '#FFFFFF');"> <!-- Change back to white -->
-            </a-image>
+            onmouseenter="this.setAttribute('scale', '0.25 0.25 0.25');"  
+            onmouseleave="this.setAttribute('scale', '0.2 0.2 0.2');"></a-image>
 
             <a-image id="linkedin-icon" 
                      src="./assets/linkedin.png" 
                      scale="0.2 0.2 0.2" 
                      position="-0.2 -0.5 -0.5" 
                      visible="false" 
+                     class="social-icon"
                      onclick="window.open('https://www.linkedin.com/in/yourprofile', '_blank');"></a-image>
             
             <a-image id="instagram-icon" 
@@ -144,6 +164,7 @@
                      scale="0.2 0.2 0.2" 
                      position="0.1 -0.5 -0.5" 
                      visible="false" 
+                     class="social-icon"
                      onclick="window.open('https://www.instagram.com/yourprofile', '_blank');"></a-image>
         </a-marker>
 
@@ -189,19 +210,19 @@
                 websiteText.setAttribute('visible', 'true');
             }, 2000); // 2 seconds delay
 
-            // Step 4: After 3 seconds, show Animated 3D Model
+            // Step 4: After 3 seconds, show Animated Model
             setTimeout(() => {
                 animatedModel.setAttribute('visible', 'true');
-            }, 3000); // 3 seconds total delay
+            }, 3000); // 3 seconds delay
 
             // Step 5: After 4 seconds, show Social Media Icons
             setTimeout(() => {
                 facebookIcon.setAttribute('visible', 'true');
                 linkedinIcon.setAttribute('visible', 'true');
                 instagramIcon.setAttribute('visible', 'true');
-            }, 4000); // 4 seconds total delay
+            }, 4000); // 4 seconds delay
         });
-        
+
         document.querySelector('#marker').addEventListener('markerLost', () => {
             const backgroundVideo = document.getElementById('background-video');
             const profileImage = document.getElementById('profile-image');
@@ -213,13 +234,11 @@
             const websiteIcon = document.getElementById('website-icon');
             const websiteText = document.getElementById('website-text');
             const animatedModel = document.getElementById('animated-model');
-            const socialIcons = [
-                document.getElementById('facebook-icon'),
-                document.getElementById('linkedin-icon'),
-                document.getElementById('instagram-icon')
-            ];
+            const facebookIcon = document.getElementById('facebook-icon');
+            const linkedinIcon = document.getElementById('linkedin-icon');
+            const instagramIcon = document.getElementById('instagram-icon');
 
-            // Hide all elements when marker is lost
+            // Hide all elements when the marker is lost
             backgroundVideo.setAttribute('visible', 'false');
             profileImage.setAttribute('visible', 'false');
             profileName.setAttribute('visible', 'false');
@@ -230,7 +249,9 @@
             websiteIcon.setAttribute('visible', 'false');
             websiteText.setAttribute('visible', 'false');
             animatedModel.setAttribute('visible', 'false');
-            socialIcons.forEach(icon => icon.setAttribute('visible', 'false'));
+            facebookIcon.setAttribute('visible', 'false');
+            linkedinIcon.setAttribute('visible', 'false');
+            instagramIcon.setAttribute('visible', 'false');
         });
     </script>
 </body>
