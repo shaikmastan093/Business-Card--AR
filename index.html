@@ -1,20 +1,237 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>AR Business Card</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stylish AR Business Card with Animated Model</title>
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
     <script src="https://ar-js-org.github.io/AR.js/aframe/build/aframe-ar.js"></script>
-</head>
-<body style="margin: 0; overflow: hidden;">
-    <a-scene embedded arjs>
-        <!-- Use your custom marker pattern file -->
-        <a-marker type="pattern" url="./marker.patt">
-            <a-image src="./assets/kfc.png" scale="1 1 1"></a-image>
-            <a-entity gltf-model="./assets/model.glb" scale="0.03 0.03 0.03"
-          animation="property: rotation; to: 0 360 0; loop: true; dur: 5000"></a-entity>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+        }
 
+        .fade-in {
+            animation: fadeIn 1s forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .slide-in {
+            animation: slideIn 1s forwards;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .flip-animation {
+            animation: flip 1s forwards;
+        }
+
+        @keyframes flip {
+            0% { transform: rotateY(0deg); }
+            50% { transform: rotateY(180deg); }
+            100% { transform: rotateY(0deg); }
+        }
+
+        .bounce-animation {
+            animation: bounce 1s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+    </style>
+</head>
+<body>
+    <a-scene embedded arjs>
+        <!-- Lighting -->
+        <a-light type="ambient" color="#ffffff" intensity="0.7"></a-light>
+        <a-light type="directional" color="#ffffff" intensity="1" position="-1 1 1"></a-light>
+
+        <!-- Marker -->
+        <a-marker type="pattern" url="./marker.patt" id="marker">
+            <!-- Video Background at the Top -->
+            <a-video id="background-video" src="./assets/video.mp4" 
+                     position="0 1.5 0" scale="2 1  1" 
+                     autoplay="false" loop="true" visible="false"></a-video>
+
+            <!-- Right Side: Profile Image and Name -->
+            <a-image id="profile-image" src="./assets/selva.png" 
+                     scale="0.5 0.5 0.5" 
+                     position="1.2 0.6 0" 
+                     visible="false"></a-image>
+            
+            <a-text id="profile-name" value="SELVENDRAN S" 
+                     position="1.5 0.1 0" 
+                     scale="1 1 1" 
+                     color="#FFD700" 
+                     align="center" 
+                     visible="false"></a-text>
+
+            <!-- New Section: Email, Contact, and Website -->
+            <a-image id="email-icon" src="./assets/email.png" 
+                     scale="0.15 0.15 0.15" 
+                     position="1.1 -0.2 0" 
+                     visible="false"></a-image>
+            <a-text id="email-text" value="selvendran.s@infrazanalytics.com" 
+                     position="1.3 -0.2 0" 
+                     scale="0.7 0.7 0" 
+                     color="#FFFFFF" 
+                     visible="false"></a-text>
+
+            <a-image id="contact-icon" src="./assets/phone.png" 
+                     scale="0.15 0.15 0.15" 
+                     position="1.1 -0.5 0" 
+                     visible="false"></a-image>
+            <a-text id="contact-text" value="+91950079783" 
+                     position="1.3 -0.5 0" 
+                     scale="0.7 0.7 0" 
+                     color="#FFFFFF" 
+                     visible="false"></a-text>
+
+            <a-image id="website-icon" src="./assets/internet.png" 
+                     scale="0.15 0.15 0.15" 
+                     position="1.1 -0.8 0" 
+                     visible="false"></a-image>
+            <a-text id="website-text" value="www.infrazanalytics.com" 
+                     position="1.3 -0.8 0" 
+                     scale="0.7 0.7 0" 
+                     color="#FFFFFF" 
+                     visible="false"></a-text>
+
+            <!-- Left Side: Animated 3D Model with Bounce Animation -->
+            <a-entity id="animated-model" gltf-model="./assets/model1.glb" 
+                      scale="0.4 0.4 0.4" 
+                      position="-1 0 0" 
+                      animation-mixer="clip: idle; loop: repeat;" 
+                      visible="false" class="bounce-animation"></a-entity>
+
+            <!-- Bottom: Social Media Icons as Images -->
+            <a-image id="facebook-icon" 
+            src="./assets/facebook.png" 
+            scale="0.2 0.2 0.2" 
+            position="-0.5 -0.5 -0.5" 
+            visible="false" 
+            class="clickable"
+            onclick="console.log('Facebook icon clicked');"
+            onmouseenter="this.setAttribute('color', '#FF0000');"  
+            onmouseleave="this.setAttribute('color', '#FFFFFF');"> <!-- Change back to white -->
+            </a-image>
+
+            <a-image id="linkedin-icon" 
+                     src="./assets/linkedin.png" 
+                     scale="0.2 0.2 0.2" 
+                     position="-0.2 -0.5 -0.5" 
+                     visible="false" 
+                     onclick="window.open('https://www.linkedin.com/in/yourprofile', '_blank');"></a-image>
+            
+            <a-image id="instagram-icon" 
+                     src="./assets/instagram.png" 
+                     scale="0.2 0.2 0.2" 
+                     position="0.1 -0.5 -0.5" 
+                     visible="false" 
+                     onclick="window.open('https://www.instagram.com/yourprofile', '_blank');"></a-image>
         </a-marker>
+
+        <!-- Camera -->
         <a-entity camera></a-entity>
     </a-scene>
+
+    <script>
+        document.querySelector('#marker').addEventListener('markerFound', () => {
+            const backgroundVideo = document.getElementById('background-video');
+            const profileImage = document.getElementById('profile-image');
+            const profileName = document.getElementById('profile-name');
+            const emailIcon = document.getElementById('email-icon');
+            const emailText = document.getElementById('email-text');
+            const contactIcon = document.getElementById('contact-icon');
+            const contactText = document.getElementById('contact-text');
+            const websiteIcon = document.getElementById('website-icon');
+            const websiteText = document.getElementById('website-text');
+            const facebookIcon = document.getElementById('facebook-icon');
+            const linkedinIcon = document.getElementById('linkedin-icon');
+            const instagramIcon = document.getElementById('instagram-icon');
+            const animatedModel = document.getElementById('animated-model');
+
+            // Step 1: Show Video
+            backgroundVideo.setAttribute('visible', 'true');
+            backgroundVideo.setAttribute('autoplay', 'true');
+
+            // Step 2: After 1 second, show Profile Image with Flip Effect
+            setTimeout(() => {
+                profileImage.setAttribute('visible', 'true');
+                profileImage.setAttribute('class', 'flip-animation');
+                profileName.setAttribute('visible', 'true');
+                profileName.setAttribute('class', 'slide-in');
+            }, 1000); // 1 second delay
+
+            // Step 3: After 2 seconds, show Email, Contact, Website info
+            setTimeout(() => {
+                emailIcon.setAttribute('visible', 'true');
+                emailText.setAttribute('visible', 'true');
+                contactIcon.setAttribute('visible', 'true');
+                contactText.setAttribute('visible', 'true');
+                websiteIcon.setAttribute('visible', 'true');
+                websiteText.setAttribute('visible', 'true');
+            }, 2000); // 2 seconds delay
+
+            // Step 4: After 3 seconds, show Animated 3D Model
+            setTimeout(() => {
+                animatedModel.setAttribute('visible', 'true');
+            }, 3000); // 3 seconds total delay
+
+            // Step 5: After 4 seconds, show Social Media Icons
+            setTimeout(() => {
+                facebookIcon.setAttribute('visible', 'true');
+                linkedinIcon.setAttribute('visible', 'true');
+                instagramIcon.setAttribute('visible', 'true');
+            }, 4000); // 4 seconds total delay
+        });
+        
+        document.querySelector('#marker').addEventListener('markerLost', () => {
+            const backgroundVideo = document.getElementById('background-video');
+            const profileImage = document.getElementById('profile-image');
+            const profileName = document.getElementById('profile-name');
+            const emailIcon = document.getElementById('email-icon');
+            const emailText = document.getElementById('email-text');
+            const contactIcon = document.getElementById('contact-icon');
+            const contactText = document.getElementById('contact-text');
+            const websiteIcon = document.getElementById('website-icon');
+            const websiteText = document.getElementById('website-text');
+            const animatedModel = document.getElementById('animated-model');
+            const socialIcons = [
+                document.getElementById('facebook-icon'),
+                document.getElementById('linkedin-icon'),
+                document.getElementById('instagram-icon')
+            ];
+
+            // Hide all elements when marker is lost
+            backgroundVideo.setAttribute('visible', 'false');
+            profileImage.setAttribute('visible', 'false');
+            profileName.setAttribute('visible', 'false');
+            emailIcon.setAttribute('visible', 'false');
+            emailText.setAttribute('visible', 'false');
+            contactIcon.setAttribute('visible', 'false');
+            contactText.setAttribute('visible', 'false');
+            websiteIcon.setAttribute('visible', 'false');
+            websiteText.setAttribute('visible', 'false');
+            animatedModel.setAttribute('visible', 'false');
+            socialIcons.forEach(icon => icon.setAttribute('visible', 'false'));
+        });
+    </script>
 </body>
 </html>
