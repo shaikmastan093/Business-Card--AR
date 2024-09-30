@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Stylish AR Business Card with Animated Model</title>
+    <title>Stylish AR Business Card</title>
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
     <script src="https://ar-js-org.github.io/AR.js/aframe/build/aframe-ar.js"></script>
     <style>
@@ -14,7 +14,7 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background-color: #f0f0f0; /* Light background for contrast */
+            background-color: #f0f0f0;
         }
 
         a-scene {
@@ -22,13 +22,12 @@
             height: 100%;
         }
 
-        /* Responsive styles */
         @media (max-width: 768px) {
             .profile-name {
-                font-size: 1.5em; /* Smaller font for mobile */
+                font-size: 1.5em;
             }
             .social-icon {
-                scale: 0.1 0.1 0.1; /* Smaller icons for mobile */
+                scale: 0.1 0.1 0.1;
             }
         }
 
@@ -65,110 +64,70 @@
             50% { transform: rotateY(180deg); }
             100% { transform: rotateY(0deg); }
         }
-
-        .bounce-animation {
-            animation: bounce 1s infinite;
-        }
-
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
     </style>
 </head>
 <body>
     <a-scene embedded arjs>
-        <!-- Lighting -->
         <a-light type="ambient" color="#ffffff" intensity="0.7"></a-light>
         <a-light type="directional" color="#ffffff" intensity="1" position="-1 1 1"></a-light>
 
-        <!-- Marker -->
         <a-marker type="pattern" url="./marker.patt" id="marker">
-            <!-- Video Background at the Top -->
             <a-video id="background-video" src="./assets/video.mp4" 
                      position="0 1.5 0" scale="2 1 1" 
                      autoplay="false" loop="true" visible="false"></a-video>
 
-            <!-- Right Side: Profile Image and Name -->
             <a-image id="profile-image" src="./assets/selva.png" 
-                     scale="0.5 0.5 0.5" 
-                     position="1.2 0.6 0" 
+                     scale="0.5 0.5 0.5" position="1.2 0.6 0" 
                      visible="false"></a-image>
             
             <a-text id="profile-name" value="SELVENDRAN S" 
-                     position="1.5 0.1 0" 
-                     scale="1 1 1" 
-                     color="#FFD700" 
-                     align="center" 
+                     position="1.5 0.1 0" scale="1 1 1" 
+                     color="#FFD700" align="center" 
                      visible="false"></a-text>
 
-            <!-- New Section: Email, Contact, and Website -->
             <a-image id="email-icon" src="./assets/email.png" 
-                     scale="0.15 0.15 0.15" 
-                     position="1.1 -0.2 0" 
+                     scale="0.15 0.15 0.15" position="1.1 -0.2 0" 
                      visible="false"></a-image>
             <a-text id="email-text" value="selvendran.s@infrazanalytics.com" 
-                     position="1.3 -0.2 0" 
-                     scale="0.7 0.7 0" 
-                     color="#FFFFFF" 
-                     visible="false"></a-text>
+                     position="1.3 -0.2 0" scale="0.7 0.7 0" 
+                     color="#FFFFFF" visible="false"></a-text>
 
             <a-image id="contact-icon" src="./assets/phone.png" 
-                     scale="0.15 0.15 0.15" 
-                     position="1.1 -0.5 0" 
+                     scale="0.15 0.15 0.15" position="1.1 -0.5 0" 
                      visible="false"></a-image>
             <a-text id="contact-text" value="+91950079783" 
-                     position="1.3 -0.5 0" 
-                     scale="0.7 0.7 0" 
-                     color="#FFFFFF" 
-                     visible="false"></a-text>
+                     position="1.3 -0.5 0" scale="0.7 0.7 0" 
+                     color="#FFFFFF" visible="false"></a-text>
 
             <a-image id="website-icon" src="./assets/internet.png" 
-                     scale="0.15 0.15 0.15" 
-                     position="1.1 -0.8 0" 
+                     scale="0.15 0.15 0.15" position="1.1 -0.8 0" 
                      visible="false"></a-image>
             <a-text id="website-text" value="www.infrazanalytics.com" 
-                     position="1.3 -0.8 0" 
-                     scale="0.7 0.7 0" 
-                     color="#FFFFFF" 
-                     visible="false"></a-text>
+                     position="1.3 -0.8 0" scale="0.7 0.7 0" 
+                     color="#FFFFFF" visible="false"></a-text>
 
-            <!-- Left Side: Animated 3D Model with Bounce Animation -->
-            <a-entity id="animated-model" gltf-model="./assets/model1.glb" 
-                      scale="0.4 0.4 0.4" 
-                      position="-1 0 0" 
-                      animation-mixer="clip: idle; loop: repeat;" 
-                      visible="false" class="bounce-animation"></a-entity>
+            <a-entity id="animated-model" gltf-model="./assets/model3.glb" 
+                      scale="0.4 0.4 0.4" position="-1 0 0" 
+                      visible="false"></a-entity>
 
-            <!-- Bottom: Social Media Icons as Images -->
-            <a-image id="facebook-icon" 
-                      src="./assets/facebook.png" 
-                      scale="0.2 0.2 0.2" 
-                      position="-0.5 -0.5 -0.5" 
-                      visible="false" 
-                      class="clickable social-icon"
-                      onclick="console.log('Facebook icon clicked');"
-                      onmouseenter="this.setAttribute('scale', '0.25 0.25 0.25');"  
-                      onmouseleave="this.setAttribute('scale', '0.2 0.2 0.2');"></a-image>
+            <a-image id="facebook-icon" src="./assets/facebook.png" 
+                     scale="0.2 0.2 0.2" position="-0.5 -0.5 -0.5" 
+                     visible="false" class="social-icon"
+                     onclick="console.log('Facebook icon clicked');"
+                     onmouseenter="this.setAttribute('scale', '0.25 0.25 0.25');"  
+                     onmouseleave="this.setAttribute('scale', '0.2 0.2 0.2');"></a-image>
 
-            <a-image id="linkedin-icon" 
-                     src="./assets/linkedin.png" 
-                     scale="0.2 0.2 0.2" 
-                     position="-0.2 -0.5 -0.5" 
-                     visible="false" 
-                     class="social-icon"
+            <a-image id="linkedin-icon" src="./assets/linkedin.png" 
+                     scale="0.2 0.2 0.2" position="-0.2 -0.5 -0.5" 
+                     visible="false" class="social-icon"
                      onclick="window.open('https://www.linkedin.com/in/yourprofile', '_blank');"></a-image>
             
-            <a-image id="instagram-icon" 
-                     src="./assets/instagram.png" 
-                     scale="0.2 0.2 0.2" 
-                     position="0.1 -0.5 -0.5" 
-                     visible="false" 
-                     class="social-icon"
+            <a-image id="instagram-icon" src="./assets/instagram.png" 
+                     scale="0.2 0.2 0.2" position="0.1 -0.5 -0.5" 
+                     visible="false" class="social-icon"
                      onclick="window.open('https://www.instagram.com/yourprofile', '_blank');"></a-image>
         </a-marker>
 
-        <!-- Camera -->
         <a-entity camera></a-entity>
     </a-scene>
 
@@ -199,9 +158,9 @@
 
             // Step 1: Show Video
             toggleVisibility('background-video', 'true');
-            toggleVisibility('background-video', 'autoplay', 'true');
+            document.getElementById('background-video').setAttribute('autoplay', 'true');
 
-            // Step 2: After 1 second, show Profile Image with Flip Effect
+            // Step 2: Show Profile Image and Name with animations
             setTimeout(() => {
                 toggleVisibility('profile-image', 'true');
                 toggleVisibility('profile-name', 'true');
@@ -209,7 +168,7 @@
                 document.getElementById('profile-name').setAttribute('class', 'slide-in');
             }, 1000); // 1 second delay
 
-            // Step 3: After 2 seconds, show Email, Contact, Website info
+            // Step 3: Show Email, Contact, and Website info
             setTimeout(() => {
                 toggleVisibility('email-icon', 'true');
                 toggleVisibility('email-text', 'true');
@@ -219,7 +178,7 @@
                 toggleVisibility('website-text', 'true');
             }, 2000); // 2 seconds delay
 
-            // Step 4: Show Animated Model
+            // Step 4: Show the Animated Model
             setTimeout(() => {
                 toggleVisibility('animated-model', 'true');
             }, 3000); // 3 seconds delay
@@ -249,12 +208,14 @@
                 'instagram-icon'
             ];
 
-            elementsToHide.forEach(elementId => {
+            const toggleVisibility = (elementId, visibility) => {
                 const element = document.getElementById(elementId);
                 if (element) {
-                    element.setAttribute('visible', 'false');
+                    element.setAttribute('visible', visibility);
                 }
-            });
+            };
+
+            elementsToHide.forEach(id => toggleVisibility(id, 'false'));
         });
     </script>
 </body>
